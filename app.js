@@ -22,7 +22,6 @@ io.on("connection", function(socket){
 	});
 	//supression tache, update la todolist et la réémet
 	socket.on("deleteTask", function(index){
-		var index = ent.encode(index);
 		todo.splice(index, 1);
 		socket.broadcast.emit("todo",todo);
 	});
