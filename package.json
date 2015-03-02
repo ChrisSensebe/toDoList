@@ -1,0 +1,11 @@
+{
+	"name": "todolist temps réel",
+	"version": "0.1.0",
+	"dependencies": {
+		"ent": "~2.2",
+		"socket.io": "~1.3",
+		"express": "~4.12"
+	},
+	"author": "aaa",
+	"description": "todolist multi-utilisateurs en temps réel"
+}
