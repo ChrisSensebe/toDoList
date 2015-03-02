@@ -10,10 +10,10 @@
 		<ul id="todo">
 		</ul>
 
-		<form action="/todo" method="post" id="todoForm">
+		<form action="/" method="post" id="todoForm">
 			<label for="tache">Que dois-je faire?</label>
 			<input type="text" name="tache" id="tache" autofocus>
-			<input type="submit">
+			<input type="submit" id="envoiTache" value="envoyer">
 		</form>
 
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -32,15 +32,15 @@
 
 			//ajout tache
 			$("#todoForm").submit(function(){
-				var tache = $("#tache").val();  //recupere la tache
-				socket.emit("tache", tache);    //emet la tache
-				$("#tache").val("").focus();    //vide la zone de saisie et la remet en focus
-				return false;                   //bloque l'envoi classique du formulaire
+				var tache = $("#tache").val(); //recupere la tache
+				socket.emit("tache", tache);   //emet la tache
+				$("#tache").val("").focus();   //vide la zone de saisie et la remet en focus
+				return false;                  //bloque l'envoi classique du formulaire
 			});
 
 			//supression tache
 			$(".task").click(function(){
-				var index = $();                   //recupere l'index de la tache
+				var index = $(".task").attr("id"); //recupere l'index de la tache
 				socket.emit("deleteTask", index);  //emet l'index de la tache a suprrimer
 			});
 
