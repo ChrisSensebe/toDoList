@@ -6,18 +6,18 @@ fs      = require("fs"),
 todo    = [];
 
 //rendu de la page
-app.get("/todo", function(req, res){
+app.get("/", function(req, res){
 	res.sendFile(__dirname + "/todo.html");
-})
-.listen(8080);
+});
 
-io.on("connection", function(socket){
+io.sockets.on("connection", function(socket){
 	//emet la todolist au client a la connection
 	socket.emit("todo", todo);
 	//reception nouvelle tache, update la todolist et la réémet
 	socket.on("newTask", function(newTask){
 		var task = ent.encode(newTask);
 		todo.push(task);
+		console.log(todo);
 		socket.broadcast.emit("todo",todo);
 	});
 	//supression tache, update la todolist et la réémet
@@ -26,3 +26,5 @@ io.on("connection", function(socket){
 		socket.broadcast.emit("todo",todo);
 	});
 });
+
+server.listen(8080);

@@ -10,7 +10,7 @@
 		<ul id="todo">
 		</ul>
 
-		<form action="/" method="post" id="todoForm">
+		<form id="todoForm">
 			<label for="tache">Que dois-je faire?</label>
 			<input type="text" name="tache" id="tache" autofocus>
 			<input type="submit" id="envoiTache" value="envoyer">
@@ -23,8 +23,9 @@
 			//connection a socket.io
 			var socket = io.connect("http://localhost:8080");
 
-			//recupération de la todolist et modification de la page
+			//recupération de la todolist rafraichissement de la liste
 			socket.on("todo", function(todo){
+				$("#todo").val("");
 				for(var i=0; i<todo.length; i++){
 					$("#todo").append("<li><a href=\"#\" id=\"i\" class=\"task\">✘</a>" + todo[i] +"</li>");
 				}
@@ -32,10 +33,11 @@
 
 			//ajout tache
 			$("#todoForm").submit(function(){
-				var tache = $("#tache").val(); //recupere la tache
-				socket.emit("tache", tache);   //emet la tache
-				$("#tache").val("").focus();   //vide la zone de saisie et la remet en focus
-				return false;                  //bloque l'envoi classique du formulaire
+				var tache = $("#tache").val();                                                         //recupere la tache
+				socket.emit("newTask", tache);                                                         //emet la tache
+				$("#todo").append("<li><a href=\"#\" id=\"i\" class=\"task\">✘</a>" + tache +"</li>"); //rajoute la tache sur la page
+				$("#tache").val("").focus();                                                           //vide la zone de saisie et la remet en focus
+				return false;                                                                          //bloque l'envoi classique du formulaire
 			});
 
 			//supression tache
