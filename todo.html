@@ -14,7 +14,7 @@
 			<label for="tache">nouvelle tache</label>
 			<input type="text" name="tache" id="tache" autofocus>
 			<input type="submit" value="ajouter">
-		</form>T
+		</form>
 
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -23,27 +23,38 @@
 			//connection a socket.io
 			var socket = io.connect("http://localhost:8080");
 
+			function lastId(){
+				if($("#todo").length == 1){
+					id = 0;
+				}
+				else{
+					id = $("button").last.attr("id");
+				}
+				return id + 1;
+			}
+
 			//recupération de la todolist rafraichissement de la liste
 			socket.on("todo", function(todo){
 				$("#todo").empty();
 				for(var i=0; i<todo.length; i++){
-					$("#todo").append("<li><button type=\"button\">✘</button>" + todo[i] + "</li>");
+					$("#todo").append("<li><button type=\"button\" id=" + i + ">✘</button>" + todo[i] + "</li>");
 				}
 			});
 
 			//ajout tache
 			$("#todoForm").submit(function(){
-				var tache = $("#tache").val();                                                  //recupere la tache
-				socket.emit("newTask", tache);                                                  //emet la tache
-				$("#todo").append("<li><button type=\"button\">✘</button>" + tache + "</li>"); //rajoute la tache sur la page
-				$("#tache").val("").focus();                                                    //vide la zone de saisie et la remet en focus
-				return false;                                                                   //bloque l'envoi classique du formulaire
+				var tache = $("#tache").val();
+				socket.emit("newTask", tache);
+				$("#todo").append("<li><button type=\"button\" id=" + lastId() + ">✘</button>" + tache + "</li>");
+				$("#tache").val("").focus();
+				lastId();
+				return false;
 			});
 
 			//supression tache
-			$(".task").click(function(){
-				var index = $(".task").attr("id"); //recupere l'index de la tache
-				socket.emit("deleteTask", index);  //emet l'index de la tache a suprrimer
+			$(".supr").click(function(){
+				var index = $(".task").attr("id");
+				socket.emit("deleteTask", index);
 			});
 
 		</script>
