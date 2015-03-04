@@ -17,7 +17,6 @@ io.sockets.on("connection", function(socket){
 	socket.on("newTask", function(newTask){
 		var task = ent.encode(newTask);
 		todo.push(task);
-		console.log(todo);
 		socket.broadcast.emit("todo",todo);
 	});
 	//supression tache, update la todolist et la réémet

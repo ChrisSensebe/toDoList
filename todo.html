@@ -25,7 +25,7 @@
 
 			//recupération de la todolist rafraichissement de la liste
 			socket.on("todo", function(todo){
-				$("#todo").val("");
+				$("#todo").empty();
 				for(var i=0; i<todo.length; i++){
 					$("#todo").append("<li><a href=\"#\" id=\"i\" class=\"task\">✘</a>" + todo[i] +"</li>");
 				}
