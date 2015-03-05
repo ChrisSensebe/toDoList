@@ -24,13 +24,13 @@
 			var socket = io.connect("http://localhost:8080");
 
 			function lastId(){
-				if($("#todo").length == 1){
-					id = 0;
+				if($("button").length == 0){
+					id = 1;
 				}
 				else{
-					id = $("button").last.attr("id");
+					id = $("button").length + 1;
 				}
-				return id + 1;
+				return id;
 			}
 
 			//recupération de la todolist rafraichissement de la liste
