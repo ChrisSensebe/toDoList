@@ -26,10 +26,10 @@
 
 			function lastId(){
 				if($("button").length == 0){
-					id = 1;
+					id = 0;
 				}
 				else{
-					id = $("button").length + 1;
+					id = $("button").length;
 				}
 				return id;
 			}
