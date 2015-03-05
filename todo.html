@@ -22,6 +22,7 @@
 
 			//connection a socket.io
 			var socket = io.connect("http://localhost:8080");
+			var test = "trololo";
 
 			function lastId(){
 				if($("button").length == 0){
@@ -52,9 +53,8 @@
 			});
 
 			//supression tache
-			$(".supr").click(function(){
-				var index = $(".task").attr("id");
-				socket.emit("deleteTask", index);
+			$("#todo").on("click", "button", function(){
+				alert($(this).attr("id"));
 			});
 
 		</script>
