@@ -11,18 +11,18 @@ app.get("/", function(req, res){
 });
 
 io.sockets.on("connection", function(socket){
-	//emet la todolist au client a la connection
+	//emet la todolist au client à sa connection
 	socket.emit("todo", todo);
-	//reception nouvelle tache, update la todolist et la réémet
+	//reception nouvelle tache: update la todolist et la reémet
 	socket.on("newTask", function(newTask){
-		var task = ent.encode(newTask);
-		todo.push(task);
-		socket.broadcast.emit("todo",todo);
+		todo.push(ent.encode(newTask));
+		socket.broadcast.emit("todo", todo);
 	});
-	//supression tache, update la todolist et la réémet
-	socket.on("deleteTask", function(index){
+	//supression tache: update la todolist et la réémet
+	socket.on("deleteTask", function(task){
+		var index = todo.indexOf(ent.encode(task));
 		todo.splice(index, 1);
-		socket.broadcast.emit("todo",todo);
+		socket.broadcast.emit("todo", todo);
 	});
 });
 

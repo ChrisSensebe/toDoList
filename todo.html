@@ -12,8 +12,8 @@
 
 		<form id="todoForm">
 			<label for="tache">nouvelle tache</label>
-			<input type="text" name="tache" id="tache" autofocus>
-			<input type="submit" value="ajouter">
+			<input type="text"id="tache" autofocus>
+			<input type="submit">
 		</form>
 
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -23,43 +23,28 @@
 			//connection a socket.io
 			var socket = io.connect("http://localhost:8080");
 
-			function lastId(){
-				if($("button").length == 0){
-					id = 0;
-				}
-				else{
-					id = $("button").length;
-				}
-				return id;
-			}
-
-			//recupération de la todolist rafraichissement de la liste
+			//à la reception de la lsite, rafraichissement de la liste affichée
 			socket.on("todo", function(todo){
 				$("#todo").empty();
 				for(var i=0; i<todo.length; i++){
-					$("#todo").append("<li><button type=\"button\" id=" + i + ">✘</button>" + todo[i] + "</li>");
+					$("#todo").append("<li><button>✘</button>" + todo[i] + "</li>");
 				}
 			});
 
-			//ajout tache
+			//recupération de la tache à ajouter, emission de celle-ci, rajout à la liste affichée
 			$("#todoForm").submit(function(){
 				var tache = $("#tache").val();
 				socket.emit("newTask", tache);
-				$("#todo").append("<li><button type=\"button\" id=" + lastId() + ">✘</button>" + tache + "</li>");
+				$("#todo").append("<li><button>✘</button>" + tache + "</li>");
 				$("#tache").val("").focus();
-				lastId();
 				return false;
 			});
 
-			//supression tache
-			/*
-
-				reste a rafraichir id elements liste !!!!!
-
-			*/
+			//recupération de la tache à supprimer, émission de celle-ci, supression de la liste affichée
 			$("#todo").on("click", "button", function(){
-				var index = $(this).attr("id");
-				socket.emit("deleteTask", index);
+				$(this).text("");
+				var task = $(this).closest("li").text();
+				socket.emit("deleteTask", task);
 				$(this).closest("li").remove();
 			});
 
