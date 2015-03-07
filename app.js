@@ -15,14 +15,14 @@ app.get("/", function(req, res){
 //communication avec socket.io
 io.sockets.on("connection", function(socket){
 	//emet la todolist au client à sa connection
-	socket.emit("todo", todo);
+	socket.emit("todo", todo)
 	//reception nouvelle tache: update la todolist et la reémet
-	socket.on("newTask", function(newTask){
+	.on("newTask", function(newTask){
 		todo.push(ent.encode(newTask));
 		socket.broadcast.emit("todo", todo);
-	});
+	})
 	//supression tache: update la todolist et la reémet
-	socket.on("deleteTask", function(task){
+	.on("deleteTask", function(task){
 		var index = todo.indexOf(ent.encode(task));
 		todo.splice(index, 1);
 		socket.broadcast.emit("todo", todo);
