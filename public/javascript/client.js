@@ -1,7 +1,7 @@
 //connection a socket.io
 var socket = io.connect("http://localhost:8080");
 
-//à la reception de la lsite, rafraichissement de la liste affichée
+//à la reception de la liste, rafraichissement de la liste affichée
 socket.on("todo", function(todo){
 	$("#todo").empty();
 	for(var i=0; i<todo.length; i++){
