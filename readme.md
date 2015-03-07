@@ -16,5 +16,5 @@
 
 ### Bibliothèques supplémentaires utilisées
 
-* Jquery
-* Bootstrap
+* Jquery    1.11.2
+* Bootstrap 3.3.2
