@@ -6,6 +6,6 @@
 		"socket.io": "~1.3",
 		"express": "~4.12"
 	},
-	"author": "aaa",
+	"author": "Professeur karambaya",
 	"description": "todolist multi-utilisateurs en temps réel"
 }

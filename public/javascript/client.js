@@ -5,7 +5,7 @@ var socket = io.connect("http://localhost:8080");
 socket.on("todo", function(todo){
 	$("#todo").empty();
 	for(var i=0; i<todo.length; i++){
-		$("#todo").append("<li><button>✘</button>" + todo[i] + "</li>");
+		$("#todo").append("<li><button class=\"btn btn-xs btn-danger\"><span class=\"glyphicon glyphicon-remove\"></button>" + todo[i] + "</li>");
 	}
 });
 
@@ -13,7 +13,7 @@ socket.on("todo", function(todo){
 $("#todoForm").submit(function(){
 	var tache = $("#tache").val();
 	socket.emit("newTask", tache);
-	$("#todo").append("<li><button>✘</button>" + tache + "</li>");
+	$("#todo").append("<li><button class=\"btn btn-xs btn-danger\"><span class=\"glyphicon glyphicon-remove\"></button>" + tache + "</li>");
 	$("#tache").val("").focus();
 	return false;
 });

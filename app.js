@@ -8,7 +8,7 @@ todo        = [];
 //rendu de la page
 app.use(express.static("public"))
 .get("/", function(req, res){
-	res.sendFile(__dirname + "/public/todo.html");
+	res.sendFile(__dirname + "/views/todo.html");
 });
 
 io.sockets.on("connection", function(socket){
