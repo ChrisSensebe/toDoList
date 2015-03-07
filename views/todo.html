@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>todolist en temps réel</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<style type="text/css">
+			h2{
+				text-align: center;
+			}
+			.jumbotron{
+				margin-top: 15px;
+				padding: 30px;
+				padding-top: 20px;
+			}
+			.col-md-3{
+				margin-bottom: 15px;
+			}
+			li{
+				list-style: none;
+				margin-bottom: 10px;
+			}
+			.btn-xs{
+				padding-top: 3px;
+				margin-right: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="container-fluid">
+			<header class="jumbotron">
+				<h2>Todolist en temps réel</h2>
+			</header>
+		</div>
+
+		<div class="container">
+
+			<legend>Liste des taches</legend>
+			<ul id="todo">
+			</ul>
+
+			<form id="todoForm">
+				<legend>Ajouter une tache</legend>
+				<div class="row">
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="tache" autofocus>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Ajouter</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="/javascript/client.js"></script>
+	</body>
+</html>
