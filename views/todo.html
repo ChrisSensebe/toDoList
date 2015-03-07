@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<title>todolist en temps réel</title>
+
+		<!-- feuilles de style -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/stylesheets/style.css">
 	</head>
@@ -16,10 +18,12 @@
 
 		<div class="container">
 
+			<!-- Zone d'affichage de la todolist -->
 			<legend>Liste de taches</legend>
 			<ul id="todo">
 			</ul>
 
+			<!-- formulaire d'ajout de tache -->
 			<form id="todoForm">
 				<legend>Ajouter une tache</legend>
 				<div class="row">
@@ -36,9 +40,10 @@
 
 		</div>
 
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<!-- scripts -->
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-		<script type="text/javascript" src="/javascript/client.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/javascript/client.js"></script>
 	</body>
 </html>

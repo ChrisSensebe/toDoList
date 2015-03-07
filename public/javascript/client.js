@@ -1,3 +1,6 @@
+
+/* script éxécuté par le client */
+
 //connection a socket.io
 var socket = io.connect("http://localhost:8080");
 
