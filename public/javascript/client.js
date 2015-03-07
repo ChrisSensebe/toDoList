@@ -12,7 +12,7 @@ socket.on("todo", function(todo){
 	}
 });
 
-//recupération de la tache à ajouter, emission de celle-ci, rajout à la liste affichée
+//recupération de la tache à ajouter, émission de celle-ci, rajout à la liste affichée
 $("#todoForm").submit(function(){
 	var tache = $("#tache").val();
 	socket.emit("newTask", tache);
@@ -21,7 +21,7 @@ $("#todoForm").submit(function(){
 	return false;
 });
 
-//recupération de la tache à supprimer, émission de celle-ci, supression de la liste affichée
+//recupération de la tache à supprimer, émission de celle-ci, supression de cette tache de la liste affichée
 $("#todo").on("click", "button", function(){
 	$(this).text("");
 	var task = $(this).closest("li").text();
