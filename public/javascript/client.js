@@ -1,10 +1,8 @@
+/* Client side script */
 
-/* script éxécuté par le client */
-
-//connection a socket.io
 var socket = io.connect("http://localhost:8080");
 
-//à la reception de la liste, rafraichissement de la liste affichée
+// updating todolist
 socket.on("todo", function(todo){
 	$("#todo").empty();
 	for(var i=0; i<todo.length; i++){
@@ -12,7 +10,7 @@ socket.on("todo", function(todo){
 	}
 });
 
-//recupération de la tache à ajouter, émission de celle-ci, rajout à la liste affichée
+// adding task
 $("#todoForm").submit(function(){
 	var tache = $("#tache").val();
 	socket.emit("newTask", tache);
@@ -21,7 +19,7 @@ $("#todoForm").submit(function(){
 	return false;
 });
 
-//recupération de la tache à supprimer, émission de celle-ci, supression de cette tache de la liste affichée
+// supr task
 $("#todo").on("click", "button", function(){
 	$(this).text("");
 	var task = $(this).closest("li").text();
