@@ -6,11 +6,13 @@ ent         = require("ent"),
 todo        = [];
 
 //rendu de la page
-app.use(express.static("public"))
-.get("/", function(req, res){
+app.get("/", function(req, res){
 	res.sendFile(__dirname + "/views/todo.html");
-});
+})
+//permet de servir les fichiers situés dans le répertoire /public (js et css)
+.use(express.static("public"));
 
+//communication avec socket.io
 io.sockets.on("connection", function(socket){
 	//emet la todolist au client à sa connection
 	socket.emit("todo", todo);
@@ -19,7 +21,7 @@ io.sockets.on("connection", function(socket){
 		todo.push(ent.encode(newTask));
 		socket.broadcast.emit("todo", todo);
 	});
-	//supression tache: update la todolist et la réémet
+	//supression tache: update la todolist et la reémet
 	socket.on("deleteTask", function(task){
 		var index = todo.indexOf(ent.encode(task));
 		todo.splice(index, 1);
@@ -27,4 +29,5 @@ io.sockets.on("connection", function(socket){
 	});
 });
 
+//ecoute du port 8080
 server.listen(8080);
