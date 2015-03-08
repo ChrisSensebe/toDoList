@@ -1,6 +1,6 @@
 /* Client side script */
 
-var socket = io.connect("http://localhost:8080");
+var socket = io.connect("https://todolist-chrissensebe.c9.io");
 
 // updating todolist
 socket.on("todo", function(todo){
